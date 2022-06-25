@@ -9,6 +9,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { SignInComponent } from './pages/sign-in/sign-in.component';
 import { DetailsMoviesComponent } from './pages/details-movies/details-movies.component';
 import { HomeMoviesComponent } from './pages/home-movies/home-movies.component';
+import { NotFoundComponent } from './pages/not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -18,11 +19,12 @@ import { HomeMoviesComponent } from './pages/home-movies/home-movies.component';
     LoginComponent,
     SignInComponent,
     DetailsMoviesComponent,
-    HomeMoviesComponent
+    HomeMoviesComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,0 +1,46 @@
+.form-control-dark {
+    border-color: #57CC99;
+    color: #fff !important;
+  }
+  .form-control-dark:focus {
+    border-color: #57CC99;
+    box-shadow: 0 0 0 .10rem #57CC99
+  }
+
+  
+  .bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+  }
+
+  @media (min-width: 768px) {
+    .bd-placeholder-img-lg {
+      font-size: 3.5rem;
+    }
+  }
+
+  .bg-dark{
+    background-color: #22577A !important;
+  }
+
+  .text-secondary {
+    color: #fff !important;
+  }
+
+  .btn-outline-light{
+    --bs-btn-border-color: #57CC99 !important;
+    --bs-btn-hover-bg: #57CC99 !important;
+    --bs-btn-hover-border-color: #57CC99 !important;
+  }
+
+  .form-control::placeholder {
+    color: white;
+    opacity: 1; 
+}
+
+.cursor{
+  cursor: pointer;
+}

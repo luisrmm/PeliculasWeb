@@ -1,1 +1,11 @@
-<p>home-movies works!</p>
+<div class="container" >
+    <div class="card" *ngFor="let itemCard of cards">
+        <img [src]="itemCard.imagen" alt="Imagen-Familia">
+        <h4>{{itemCard.title}}</h4>
+        <p class="card-text">{{itemCard.description}}</p>
+        <p class="card-text">{{itemCard.actor1}}</p>
+        <p class="card-text">{{itemCard.actor2}}</p>
+        <p class="card-text">{{itemCard.actor3}}</p>
+        <a class="click" (click)="redirect(itemCard.toPage)">{{itemCard.button}}</a>
+    </div>
+</div>
