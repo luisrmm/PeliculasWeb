@@ -1,0 +1,80 @@
+.row{
+    display: flex;
+    width: 100%;
+    height: 700px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.columnL{
+    background-color: #fff;
+    height: 250px;
+    width: 400px;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    box-shadow: 5px 10px 18px #888888;
+}
+
+.columnR{
+    background-color: #fff;
+    height: 500px;
+    width: 400px;
+    box-shadow: 5px 10px 18px #888888;
+}
+
+.createAccountClick{
+    color: #57CC99;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.createAccountClick:hover{
+    color: #22577A;
+}
+
+.space{
+    margin-top: 20px;
+}
+
+.spaceBottom{
+    margin-bottom: 10px;
+}
+
+.center{
+    margin: 60px;
+}
+
+.btn{
+    background-color: #57CC99;
+    border-color: #57CC99;
+}
+
+.btn:hover{
+    background-color: #22577A;
+    border-color: #22577A;
+}
+
+@media (max-width: 768px) {
+    .row{
+      align-items: center;
+      margin: 0px;
+    }
+    .columnL {
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        border-bottom-left-radius: 0px;
+        width: 235px;
+        display: flex;
+        align-items: center;
+        display: none;
+    }
+    .columnL > img{
+        width: 250px;
+        border-radius: 10px;
+    }
+    .columnR{
+        width: 300px;
+        height: 430px;
+    }  
+  }

@@ -7,7 +7,7 @@ import { SignInComponent } from './pages/sign-in/sign-in.component';
 
 const routes: Routes = [
   // Start Re-direct
-  { path: '', pathMatch: 'full', redirectTo: 'home' },
+  { path: '', pathMatch: 'full', redirectTo: 'login' },
   // Success User Pages
   { path: 'login', component: LoginComponent },
   { path: 'home', component: HomeMoviesComponent },
