@@ -4,18 +4,37 @@
 
     </div>
     <div class="columnR">
-            <form class="center">
+            <form [formGroup]="loginForm" class="center" (ngSubmit)="onLogin()" errorTailor>
                 <div class="form-group space">
-                  <label class="spaceBottom" for="exampleInputEmail1">Usuario</label>
-                  <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                  <label class="spaceBottom" for="userName">Usuario</label>
+                  <input type="text" class="form-control" id="userName" formControlName="userName" [(ngModel)]="login.userName"
+                  [controlErrorsTpl]="usernNameError" maxlength="15">
                 </div>
                 <div class="form-group space">
-                  <label class="spaceBottom" for="exampleInputPassword1">Contraseña</label>
-                  <input type="password" class="form-control" id="exampleInputPassword1">
+                  <label class="spaceBottom" for="passText">Contraseña</label>
+                  <input type="password" class="form-control" id="passText" formControlName="password" [(ngModel)]="login.password" maxlength="6">
+                  <ng-container *ngTemplateOutlet="passwordError; context:{error: loginForm.get('password')?.errors}"></ng-container>
                 </div>
-                <button type="submit" class="btn btn-primary space btn" (click)="redirect('home')">Iniciar Sesión</button>
+                <button type="submit" [disabled]="loginForm.invalid" class="btn btn-primary space btn">Iniciar Sesión</button>
             </form>
             <span class="createAccount"> ¿Aún no tiene una cuenta? </span>
             <span class="createAccountClick" (click)="redirect('sign-in')">Regístrate</span>
     </div>
 </div>
+
+<ng-template let-error let-text="text" #usernNameError>
+  <!-- {{error | json}} {{text}} -->
+  <div *ngIf="error?.minlength" class="errorMessage">
+    <i>El nombre de usuario debe ser mayor a 4 caracteres y menor a 15 caracteres</i>
+  </div>
+  <div *ngIf="error?.maxlength">
+    <i>El nombre de usuario debe ser mayor a 4 caracteres y menor a 15 caracteres </i>
+  </div>
+</ng-template>
+
+<ng-template let-error="error" #passwordError>
+  <!-- {{error | json}} {{text}} -->
+  <div *ngIf="error?.pattern?.requiredPattern" class="errorMessage">
+    <i>La contraseña debe contener: A, a, 1, @</i>
+  </div>
+</ng-template>

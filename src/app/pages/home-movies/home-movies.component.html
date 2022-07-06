@@ -6,6 +6,39 @@
         <p class="card-text">{{itemCard.actor1}}</p>
         <p class="card-text">{{itemCard.actor2}}</p>
         <p class="card-text">{{itemCard.actor3}}</p>
-        <a class="click" (click)="redirect(itemCard.toPage)">{{itemCard.button}}</a>
-    </div>
+        <a class="click" (click)="openFormModal()">{{itemCard.button}}</a>
 </div>
+
+<!-- Button trigger modal -->
+
+  
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content" >
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Pelicula</h5>
+          <span aria-hidden="true" class="closeM" (click)="closeFormModal()">&times;</span>
+        </div>
+        <div class="modal-body" *ngFor="let itemModal of modal">
+          <div class="row" >
+            <div class="columnL">
+              <img [src]="itemModal.imagen" alt="Imagen-Familia">
+              <p class="card-text">{{itemModal.description}}</p>
+              <p class="card-text">{{itemModal.description}}</p>
+              <p class="card-text">{{itemModal.description}}</p>
+              <p class="card-text">{{itemModal.description}}</p>
+            </div>
+            <div class="columnC">
+              <h4>Involucrados</h4>
+              <p class="card-text">{{itemModal.description}}</p>
+            </div>
+            <div class="columnR">
+              <h4>Comentarios</h4>
+              <app-comments></app-comments>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

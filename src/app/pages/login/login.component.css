@@ -55,6 +55,19 @@
     border-color: #22577A;
 }
 
+input.form-control.ng-pristine.ng-invalid.ng-touched{
+    border: solid 2px tomato;
+}
+
+input.form-control.ng-invalid.ng-touched.ng-dirty{
+    border: solid 2px tomato;
+}
+
+.errorMessage{
+    font-size: smaller;
+    color: tomato;
+}
+
 @media (max-width: 768px) {
     .row{
       align-items: center;

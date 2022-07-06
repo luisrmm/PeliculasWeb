@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import {FormGroup, FormControl, Validators, FormBuilder} from '@angular/forms'
+import{ ApiService } from '../../services/api/api.service'
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -8,48 +11,42 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  cards = [
-    {
-      description: 'lorem isuem',
-      imagen: 'assets/poster1.jpg',
-      title: 'Préstamo',
-      button: 'Ver más',
-      toPage: 'admin/menu-config/tasa-interes',
-    },
-    {
-      description: 'lorem isuem',
-      imagen: 'assets/poster1.jpg',
-      title: 'Tipo de cambio',
-      button: 'Ver más',
-      toPage: 'admin/menu-config/tipo-cambio',
-    },
-    {
-      description: 'lorem isuem',
-      imagen: 'assets/poster1.jpg',
-      title: 'Registrar Administrador',
-      button: 'Ver más',
-      toPage: 'admin/menu-config/sing-in-admin',
-    },
-    {
-      description: 'lorem isuem',
-      imagen: 'assets/poster1.jpg',
-      title: 'Nivel de endeudamiento',
-      button: 'Ver más',
-      toPage: 'admin/menu-config/nivel-endeudamiento',
-    },
-    {
-      description: 'lorem isuem',
-      imagen: 'assets/poster1.jpg',
-      title: 'Automatización de tramitador',
-      button: 'Ver más',
-      toPage: 'admin/menu-config/automatizaion',
-    },
-  ];
+  loginForm!: FormGroup;
+  private validationPattern =
+  "(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-zd$@$!%*?&].{5,}";
 
+  login: any = {
+    userName: '',
+    password: ''
+  }
 
-  constructor(public router: Router) { }
+  constructor(
+    public router: Router,
+    private api: ApiService,
+    private formBuilder: FormBuilder
+    ) { }
 
   ngOnInit(): void {
+    this.loginForm = this.formBuilder.group({
+      userName : ['', [Validators.required, Validators.minLength(4), Validators.maxLength(15)]],
+      password : ['',  [Validators.required, Validators.pattern(this.validationPattern)]]
+    })
+  }
+
+  onLogin(){
+    let l =  this.api.userLogin(this.login);
+    l.subscribe(data =>{
+      localStorage.setItem('Token', data.token);
+      this.api.errorsByUSer[this.login.userName] = 0;
+      this.router.navigate(['home']);
+      Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: 'Inicio de sesion fue éxitoso',
+        showConfirmButton: false,
+        timer: 2500
+      })
+    })
   }
 
   redirect(toPage: string) {
