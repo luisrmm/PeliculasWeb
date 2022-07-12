@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import {FormGroup, FormControl, Validators, FormBuilder} from '@angular/forms'
+import {FormGroup, Validators, FormBuilder} from '@angular/forms'
 import{ ApiService } from '../../services/api/api.service'
 import Swal from 'sweetalert2';
 
@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
   onLogin(){
     let l =  this.api.userLogin(this.login);
     l.subscribe(data =>{
-      localStorage.setItem('Token', data.token);
+      localStorage.setItem('userName', JSON.stringify(data.userName));
       this.api.errorsByUSer[this.login.userName] = 0;
       this.router.navigate(['home']);
       Swal.fire({

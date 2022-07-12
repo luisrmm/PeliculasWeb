@@ -1,12 +1,14 @@
 <div class="container" >
-    <div class="card" *ngFor="let itemCard of cards">
-        <img [src]="itemCard.imagen" alt="Imagen-Familia">
-        <h4>{{itemCard.title}}</h4>
-        <p class="card-text">{{itemCard.description}}</p>
-        <p class="card-text">{{itemCard.actor1}}</p>
-        <p class="card-text">{{itemCard.actor2}}</p>
-        <p class="card-text">{{itemCard.actor3}}</p>
-        <a class="click" (click)="openFormModal()">{{itemCard.button}}</a>
+    <div class="card" *ngFor="let itemCard of moviesI">
+        <img [src]="itemCard.poster" alt="Imagen-Movie">
+        <h4>{{itemCard.name}}</h4>
+        <p class="card-text">{{itemCard.review}}</p>
+        <p class="card-text">{{itemCard.dateCreated | date: 'dd/MM/yyyy'}}</p>
+        <div class="spaceA" *ngFor="let involved of itemCard.involved;  let i=index">
+            <p class="card-text" *ngIf="i<3">{{involved.idRolNavigation.name}}: {{involved.idWorkerNavigation.name}}</p>
+        </div>
+          <!-- <p class="card-text">{{itemCard.actor3}}</p> -->
+        <a class="click" (click)="openFormModal(itemCard)">Detalles</a>
 </div>
 
 <!-- Button trigger modal -->
@@ -23,19 +25,32 @@
         <div class="modal-body" *ngFor="let itemModal of modal">
           <div class="row" >
             <div class="columnL">
-              <img [src]="itemModal.imagen" alt="Imagen-Familia">
-              <p class="card-text">{{itemModal.description}}</p>
-              <p class="card-text">{{itemModal.description}}</p>
-              <p class="card-text">{{itemModal.description}}</p>
-              <p class="card-text">{{itemModal.description}}</p>
+              <img [src]="selectedMovie.poster" alt="Imagen-Familia">
+              <h4 class="card-text space">{{selectedMovie.name}}</h4>
+              <p class="card-text">{{selectedMovie.review}}</p>
+              <p class="card-text">{{selectedMovie.dateCreated | date: 'dd/MM/yyyy'}}</p>
+              <div *ngFor="let q of selectedMovie.qualifiaction">
+                <ngx-rating-input
+                  ngDefaultControl
+                  [max]="5"
+                  [min]="0"
+                  [disabled]="true"
+                  [value]="q.qualification"
+                  customClass="my-class"
+                >
+                </ngx-rating-input>
+                <p class="card-text">{{q.qualification}}</p>
+              </div>
             </div>
             <div class="columnC">
               <h4>Involucrados</h4>
-              <p class="card-text">{{itemModal.description}}</p>
+              <div class="space" *ngFor="let involved of selectedMovie.involved">
+                <p class="card-text">{{involved.idRolNavigation.name}}: {{involved.idWorkerNavigation.name}}</p>
+              </div>
             </div>
             <div class="columnR">
               <h4>Comentarios</h4>
-              <app-comments></app-comments>
+              <app-comments [comments]="selectedMovie.comment"></app-comments>
             </div>
           </div>
         </div>

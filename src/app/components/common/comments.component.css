@@ -15,7 +15,6 @@ div.comment {
     margin-bottom: 10px;
     border-width:2px;
     border-style:solid;
-    border-color:#57CC99;
 }
 
 div.comment:nth-child(odd) {
@@ -30,6 +29,9 @@ div.comment:nth-child(odd) {
 div.myComment {
     text-align: end;
     margin-bottom: 10px;
+    background-color: white !important;
+    border-color:#57CC99 !important;
+    color: black !important;
 }
 
 .commentInput {
@@ -62,4 +64,17 @@ label{
     background-color: #22577A;
     border-color: #22577A;
     color: white;
+}
+
+input.form-control.ng-pristine.ng-invalid.ng-touched{
+    border: solid 2px tomato;
+}
+
+input.form-control.ng-invalid.ng-touched.ng-dirty{
+    border: solid 2px tomato;
+}
+
+.errorMessage{
+    font-size: smaller;
+    color: tomato;
 }

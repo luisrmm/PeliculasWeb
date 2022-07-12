@@ -14,6 +14,9 @@ import { DetailsMoviesComponent } from './pages/details-movies/details-movies.co
 import { HomeMoviesComponent } from './pages/home-movies/home-movies.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { CommentsComponent } from './components/common/comments.component';
+import { DatePipe } from '@angular/common';
+import { RatingsHelperModule } from 'ngx-ratings-helper';
+
 
 @NgModule({
   declarations: [
@@ -32,6 +35,7 @@ import { CommentsComponent } from './components/common/comments.component';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    RatingsHelperModule,
     ReactiveFormsModule,
     ErrorTailorModule.forRoot({
       errors: {
@@ -40,7 +44,7 @@ import { CommentsComponent } from './components/common/comments.component';
             required: '',
             minlength: ({ requiredLength, actualLength }) => `Expect ${requiredLength} but got ${actualLength}`,
             maxlength: ({ requiredLength, actualLength }) => `Expect ${requiredLength} but got ${actualLength}`,
-            invalidAddress: error => `Address not valid`
+            invalidAddress: () => `Address not valid`
           };
         },
         deps: []
@@ -49,7 +53,7 @@ import { CommentsComponent } from './components/common/comments.component';
       //controlErrorComponentAnchorFn: controlErrorComponentAnchorFn // Uncomment to see errors being positioned differently
     })
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

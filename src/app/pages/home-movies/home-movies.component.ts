@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import {Modal} from "bootstrap";
+import { Modal } from "bootstrap";
+import { ApiService } from '../../services/api/api.service'
 declare var window: any;
 
 @Component({
@@ -14,9 +15,9 @@ export class HomeMoviesComponent implements OnInit {
   cards = [
     {
       imagen: 'assets/poster1.jpg',
-      actor1:'Pedero',
-      actor2:'Jose',
-      actor3:'Luis',
+      actor1: 'Pedero',
+      actor2: 'Jose',
+      actor3: 'Luis',
       description: 'lorem isuem',
       title: 'Doctor Strange',
       button: 'Ver más',
@@ -24,9 +25,9 @@ export class HomeMoviesComponent implements OnInit {
     },
     {
       imagen: 'assets/poster1.jpg',
-      actor1:'Pedero',
-      actor2:'Jose',
-      actor3:'Luis',
+      actor1: 'Pedero',
+      actor2: 'Jose',
+      actor3: 'Luis',
       description: 'lorem isuem',
       title: 'Doctor Strange',
       button: 'Ver más',
@@ -34,9 +35,9 @@ export class HomeMoviesComponent implements OnInit {
     },
     {
       imagen: 'assets/poster1.jpg',
-      actor1:'Pedero',
-      actor2:'Jose',
-      actor3:'Luis',
+      actor1: 'Pedero',
+      actor2: 'Jose',
+      actor3: 'Luis',
       description: 'lorem isuem',
       title: 'Doctor Strange',
       button: 'Ver más',
@@ -44,9 +45,9 @@ export class HomeMoviesComponent implements OnInit {
     },
     {
       imagen: 'assets/poster1.jpg',
-      actor1:'Pedero',
-      actor2:'Jose',
-      actor3:'Luis',
+      actor1: 'Pedero',
+      actor2: 'Jose',
+      actor3: 'Luis',
       description: 'lorem isuem',
       title: 'Doctor Strange',
       button: 'Ver más',
@@ -54,9 +55,9 @@ export class HomeMoviesComponent implements OnInit {
     },
     {
       imagen: 'assets/poster1.jpg',
-      actor1:'Pedero',
-      actor2:'Jose',
-      actor3:'Luis',
+      actor1: 'Pedero',
+      actor2: 'Jose',
+      actor3: 'Luis',
       description: 'lorem isuem',
       title: 'Doctor Strange',
       button: 'Ver más',
@@ -67,9 +68,9 @@ export class HomeMoviesComponent implements OnInit {
   modal = [
     {
       imagen: 'assets/poster1.jpg',
-      actor1:'Pedero',
-      actor2:'Jose',
-      actor3:'Luis',
+      actor1: 'Pedero',
+      actor2: 'Jose',
+      actor3: 'Luis',
       description: 'lorem isuem',
       title: 'Doctor Strange',
       button: 'Ver más',
@@ -77,28 +78,48 @@ export class HomeMoviesComponent implements OnInit {
     }
   ];
 
+  moviesI!: any[];
 
+  selectedMovie: any = {};
 
   testModal: Modal | undefined;
 
-  constructor(public router: Router) { }
+  currentItem = 'Television';
+
+  constructor(
+    public router: Router,
+    private api: ApiService,
+  ) { }
 
   ngOnInit(): void {
     this.formModal = new window.bootstrap.Modal(
       document.getElementById('myModal')
     );
+    this.getFiveMovies();
+  }
+
+  getFiveMovies() {
+    let m = this.api.fiveMovies()
+    m.subscribe(
+      data => {
+        this.moviesI = data;
+        console.log(this.moviesI)
+      }
+    )
   }
 
   redirect(toPage: string) {
-    
+
     this.router.navigate([toPage]);
   }
-  openFormModal() {
+  openFormModal(itemCard: any) {
+    this.selectedMovie = itemCard;
+    console.log(this.selectedMovie);
     this.formModal.show();
   }
 
   closeFormModal() {
     this.formModal.hide();
   }
-  
+
 }

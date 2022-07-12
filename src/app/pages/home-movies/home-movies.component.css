@@ -1,7 +1,7 @@
 .container {
     width: 100%;
     max-width: 1200px;
-    height: 100%;
+    height: auto;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -108,4 +108,12 @@
   .modal-header{
     background-color: #22577A;
     color: white;
+  }
+
+  .space{
+    margin-top: 15px;
+  }
+
+  .spaceA{
+    margin-top: 5px;
   }

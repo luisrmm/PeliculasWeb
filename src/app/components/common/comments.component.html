@@ -1,102 +1,31 @@
-<div class="scroll">
-    <div class="comment">
-        <strong>Luis:</strong>
-        It is a good platform to learn programming.
-    </div>
+<div class="scroll" >
+    <div *ngFor="let item of comments">
 
-    <div class="comment myComment">
-        <!-- No mostrar cuando se yo el user  -->
-        <!-- <strong>Luis:</strong>  -->
-        It is an educational website. Prepare for the Recruitment drive
-    </div>
-
-    <div class="comment">
-        <strong>Luis:</strong>
-        It is an educational website. Prepare for the Recruitment drive
-    </div>
-
-    <div class="comment">
-        <strong>Luis:</strong>
-        of product based companies like Microsoft, Amazon, Adobe etc with
-    </div>
-
-    <div class="comment">
-        <strong>Luis:</strong>
-        a free online placement preparation course. The course focuses
-    </div>
-
-    <div class="comment">
-        <strong>Luis:</strong>
-        on various MCQ's & Coding question likely to be asked in the
-    </div>
-
-
-    <div class="comment">
-        <strong>Luis:</strong>
-        interviews & make your upcoming placement season efficient and
-    </div>
-
-    <div class="comment">
-        <strong>Luis:</strong>
-        successful. Also, any geeks can help other geeks by writing
-    </div>
-
-    <div class="comment">
-        <strong>Luis:</strong>
-        steps that are Articles that need little modification/improvement
-    </div>
-
-    <div class="comment">
-        <strong>Luis:</strong>
-        coding style, and try to make you are close to them. In case you
-    </div>
+        <div class="comment" *ngIf="item.userName != user">
+            <strong>{{item.userName}}:</strong>
+            {{item.comment1}}
+        </div>
     
-           <div class="comment">
-        <strong>Luis:</strong>
-        It is an educational website. Prepare for the Recruitment drive
-    </div>
-
-    <div class="comment">
-        <strong>Luis:</strong>
-        of product based companies like Microsoft, Amazon, Adobe etc with
-    </div>
-
-    <div class="comment">
-        <strong>Luis:</strong>
-        a free online placement preparation course. The course focuses
-    </div>
-
-    <div class="comment">
-        <strong>Luis:</strong>
-        on various MCQ's & Coding question likely to be asked in the
-    </div>
-
-
-    <div class="comment">
-        <strong>Luis:</strong>
-        interviews & make your upcoming placement season efficient and
-    </div>
-
-    <div class="comment">
-        <strong>Luis:</strong>
-        successful. Also, any geeks can help other geeks by writing
-    </div>
-
-    <div class="comment">
-        <strong>Luis:</strong>
-        steps that are Articles that need little modification/improvement
-    </div>
-
-    <div class="comment">
-        <strong>Luis:</strong>
-        coding style, and try to make you are close to them. In case you
+        <div class="comment myComment" *ngIf="item.userName === user">
+            <!-- No mostrar cuando se yo el user  -->
+            <!-- <strong>Luis:</strong>  -->
+            {{item.comment1}}
+        </div>
     </div>
 </div>
 
 <br />
 
-<form class="formComment">
-    <label class="spaceBottom" for="exampleInputEmail1">Comentario</label>
-    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-    <button type="submit" class="btn btn-primary space btn">Comentar</button>
+<form  [formGroup]="commentForm" class="formComment" (ngSubmit)="commentApi()">
+    <label class="spaceBottom" for="comment1">Comentario</label>
+    <input type="text" class="form-control" id="comment1"  formControlName="comment1" [(ngModel)]="commentInput.comment1"
+    [controlErrorsTpl]="commentError"  maxlength="140">
+    <button type="submit" class="btn btn-primary space btn" [disabled]="commentForm.invalid" >Comentar</button>
 </form>
+
+<ng-template let-error let-text="text" #commentError>
+    <!-- {{error | json}} {{text}} -->
+    <div *ngIf="error?.minlength" class="errorMessage">
+      <i>El comentario debe ser mayor a 4 caracteres</i>
+    </div>
+  </ng-template>

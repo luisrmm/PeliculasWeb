@@ -5,6 +5,7 @@ import { ResponLI } from '../../models/responseLogin.interface';
 import {HttpClient,} from '@angular/common/http'
 import { catchError, Observable, throwError } from 'rxjs';
 import Swal from 'sweetalert2';
+import { commentI } from 'src/app/models/comment.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,8 @@ import Swal from 'sweetalert2';
 export class ApiService {
 
   url: string = "https://localhost:44349/api/Users/";
+  urlMovie: string = "https://localhost:44349/api/Movies/"
+  urlComment: string = "https://localhost:44349/api/Comments/";
   errorMessageApi = "";
   contError = 0;
 
@@ -19,6 +22,8 @@ export class ApiService {
 
 
   constructor(private http: HttpClient) { }
+
+  //Auth methods
 
   userLogin(login: LoginI): Observable<ResponLI>{
     return this.http.post<ResponLI>(this.url + "Login", login).pipe(
@@ -82,4 +87,30 @@ export class ApiService {
     })
     return throwError(() => new Error(error.map));
   }
+
+
+   //Movies methods
+   
+   fiveMovies(): Observable<any>{
+    return this.http.get<any>(this.urlMovie + "proc")
+   }
+
+   generateComment(comment: commentI){
+    return this.http.post<commentI>(this.urlComment + "Comment", comment).pipe(
+      catchError(err => this.catchCommentError(err)),
+    )
+   }
+
+   catchCommentError(error: any ): Observable<any>{
+    if (error && error.error && error.error.message){
+      this.errorMessageApi = error.error.error;
+    }else if( error && error.message){
+      this.errorMessageApi = error.error;
+    }else{
+      this.errorMessageApi = error;
+    }
+    console.log(this.errorMessageApi);
+    return throwError(() => new Error(error.map));
+  }
+   
 }

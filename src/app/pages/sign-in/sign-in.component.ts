@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import{ ApiService } from '../../services/api/api.service'
 import{ SingI } from '../../models/sing-in.interface'
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -32,7 +32,7 @@ export class SignInComponent implements OnInit {
   ngOnInit(): void {
     this.singInForm = this.formBuilder.group({
       userName : ['', [Validators.required, Validators.minLength(4), Validators.maxLength(15)]],
-    name : ['', [Validators.required, Validators.minLength(4)]],
+      name : ['', [Validators.required, Validators.minLength(4)]],
       lastName : ['', [Validators.required , Validators.minLength(4)]],
       email : ['', [Validators.required, Validators.email]],
       password : ['',  [Validators.required, Validators.pattern(this.validationPattern)]]
@@ -43,7 +43,6 @@ export class SignInComponent implements OnInit {
     let s = this.api.userSingIn(this.singIn)
     s.subscribe(
       data => {
-        console.log(data.userName);
         this.router.navigate(['login']);
         Swal.fire({
           icon: 'success',
