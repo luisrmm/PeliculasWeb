@@ -73,6 +73,13 @@ input.form-control.ng-invalid.ng-touched.ng-dirty{
     color: tomato;
 }
 
+.imageSize{
+  width: 295px;
+  height: 299px;
+  object-fit: contain;
+}
+
+
 @media (max-width: 768px) {
     .row{
       align-items: center;

@@ -12,9 +12,9 @@ import { commentI } from 'src/app/models/comment.interface';
 })
 export class ApiService {
 
-  url: string = "https://localhost:44349/api/Users/";
-  urlMovie: string = "https://localhost:44349/api/Movies/"
-  urlComment: string = "https://localhost:44349/api/Comments/";
+  url: string = "https://apimovie.somee.com/api/Users/";
+  urlMovie: string = "https://apimovie.somee.com/api/Movies/"
+  urlComment: string = "https://apimovie.somee.com/api/Comments/";
   errorMessageApi = "";
   contError = 0;
   lastDate = 0;
@@ -27,27 +27,15 @@ export class ApiService {
   //Auth methods
 
   userLogin(login: LoginI): Observable<ResponLI>{
-    this.setlastChangeDate()
     return this.http.post<ResponLI>(this.url + "Login", login).pipe(
       catchError(err => this.catchLoginError(err, login.userName)),
     )
   }
 
   userSingIn(sing: SingI): Observable<SingI>{
-    this.setlastChangeDate()
     return this.http.post<SingI>(this.url + "SingIn", sing).pipe(
       catchError(err => this.catchSingInError(err)),
     )
-  }
-
-  setlastChangeDate(){
-    this.lastDate = new Date().getTime();
-    console.log("Fecha", this.lastDate);
-
-  }
-
-  getLastChangedDate(){
-    return this.lastDate
   }
 
   catchLoginError(error: any, uid: string): Observable<any>{
@@ -101,12 +89,10 @@ export class ApiService {
    //Movies methods
 
    fiveMovies(): Observable<any>{
-    this.setlastChangeDate()
     return this.http.get<any>(this.urlMovie + "proc")
    }
 
    searchMovies(nameMovie: any){
-    this.setlastChangeDate()
     return this.http.get<any>(this.urlMovie + 'Search/' + nameMovie, {}).pipe(
       catchError(err => this.catchMovieError(err)),
     )
@@ -125,14 +111,12 @@ export class ApiService {
 
   //Comments
    generateComment(comment: commentI){
-    this.setlastChangeDate()
     return this.http.post<commentI>(this.urlComment + "Comment", comment).pipe(
       catchError(err => this.catchCommentError(err)),
     )
    }
 
    getActualComment(idMovie : any){
-    this.setlastChangeDate()
     return this.http.get<commentI[]>(this.urlComment + idMovie, {});
    }
 

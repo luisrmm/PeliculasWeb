@@ -146,3 +146,30 @@
   background-color: #22577A;
   border-color: #22577A;
 }
+
+.back{
+  display: flex;
+  justify-content: center;
+}
+
+
+@media (max-width: 768px) {
+  .row{
+    align-items: center;
+    height: auto;
+    justify-content: center;
+    width: auto;
+  }
+  .modal-xl {
+    --bs-modal-height: auto !important;
+  }
+  .columnL{
+    box-shadow: none;
+  }
+  .columnC{
+    box-shadow: none;
+  }
+  .columnR{
+    box-shadow: none;
+  }
+}

@@ -22,7 +22,7 @@ export class AppComponent {
   }
 
   setTimeout() {
-    this.userActivity = setTimeout(() => this.userInactive.next(undefined), 30000);
+    this.userActivity = setTimeout(() => this.userInactive.next(undefined), 300000);
   }
 
   @HostListener('window:mousemove') refreshUserState() {

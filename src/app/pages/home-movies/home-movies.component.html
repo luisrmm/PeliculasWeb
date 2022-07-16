@@ -28,11 +28,14 @@
           ingresar un nuevo nombre de pelicula a buscar!</p>
         <br/>
         <p>Para volver a la página de inicio, haga clic sobre el botón a continuación</p>
-        <button type="submit"  class="btn btn-primary space btn" (click)="redirect('home')">Iniciar Sesión</button>
+        <button type="submit"  class="btn btn-primary space btn" (click)="redirect('home')">Inicio</button>
       </div>
 
     </div>
   </ng-template>
+</div>
+<div *ngIf="showButton" class="back">
+  <button type="submit"  class="btn btn-primary space btn" (click)="redirect('home')">Regresar</button>
 </div>
 
 <!-- Button trigger modal -->

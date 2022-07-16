@@ -26,7 +26,6 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.isAuthenticated = this.storageService.isAuthenticated();
-    console.log("On changes", this.isAuthenticated);
   }
 
   keyDownFunction(event: any) {

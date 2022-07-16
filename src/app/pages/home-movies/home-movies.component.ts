@@ -19,6 +19,7 @@ export class HomeMoviesComponent implements OnInit {
   testModal: Modal | undefined;
   nameMovie = '';
   loading = true;
+  showButton = false;
 
   public messageAObservable!: Observable<string>;
 
@@ -43,6 +44,7 @@ export class HomeMoviesComponent implements OnInit {
   }
 
   getFiveMovies() {
+    this.showButton = false;
     let m = this.api.fiveMovies()
     m.subscribe(
       data => {
@@ -59,6 +61,7 @@ export class HomeMoviesComponent implements OnInit {
       data => {
         this.moviesI = data;
         this.loading = false;
+        this.showButton = true;
       }
     )
   }
