@@ -1,59 +1,80 @@
-<div class="container" >
+<app-header></app-header>
+<div class="d-flex justify-content-center" *ngIf="loading" >
+  <div class="spinner-border" role="status"></div>
+</div>
+<div class="container" *ngIf="!loading" >
+  <ng-template [ngIf]="moviesI.length > 0" [ngIfElse]="sinMovies">
     <div class="card" *ngFor="let itemCard of moviesI">
-        <img [src]="itemCard.poster" alt="Imagen-Movie">
-        <h4>{{itemCard.name}}</h4>
-        <p class="card-text">{{itemCard.review}}</p>
-        <p class="card-text">{{itemCard.dateCreated | date: 'dd/MM/yyyy'}}</p>
-        <div class="spaceA" *ngFor="let involved of itemCard.involved;  let i=index">
-            <p class="card-text" *ngIf="i<3">{{involved.idRolNavigation.name}}: {{involved.idWorkerNavigation.name}}</p>
-        </div>
-          <!-- <p class="card-text">{{itemCard.actor3}}</p> -->
-        <a class="click" (click)="openFormModal(itemCard)">Detalles</a>
+      <img [src]="itemCard.poster" alt="Imagen-Movie" />
+      <h4>{{ itemCard.name }}</h4>
+      <p class="card-text">{{ itemCard.review }}</p>
+      <p class="card-text">{{ itemCard.dateCreated | date: "dd/MM/yyyy" }}</p>
+      <div class="spaceA" *ngFor="let involved of itemCard.involved; let i = index">
+        <p class="card-text" *ngIf="i < 3">
+          {{ involved.idRolNavigation.name }}:
+          {{ involved.idWorkerNavigation.name }}
+        </p>
+      </div>
+      <!-- <p class="card-text">{{itemCard.actor3}}</p> -->
+      <a class="click" (click)="openFormModal(itemCard)">Detalles</a>
+    </div>
+  </ng-template>
+  <ng-template #sinMovies>
+    <div class="messageError">
+      <div class="textAling">
+        <h1>Pelicula no encontrada</h1>
+        <br/>
+        <p>No se encontraron peliculas para su busqueda: {{nameMovie}}, por favor
+          ingresar un nuevo nombre de pelicula a buscar!</p>
+        <br/>
+        <p>Para volver a la página de inicio, haga clic sobre el botón a continuación</p>
+        <button type="submit"  class="btn btn-primary space btn" (click)="redirect('home')">Iniciar Sesión</button>
+      </div>
+
+    </div>
+  </ng-template>
 </div>
 
 <!-- Button trigger modal -->
 
-  
-  <!-- Modal -->
-  <div class="modal fade" id="myModal" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-xl">
-      <div class="modal-content" >
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Pelicula</h5>
-          <span aria-hidden="true" class="closeM" (click)="closeFormModal()">&times;</span>
-        </div>
-        <div class="modal-body" *ngFor="let itemModal of modal">
-          <div class="row" >
-            <div class="columnL">
-              <img [src]="selectedMovie.poster" alt="Imagen-Familia">
-              <h4 class="card-text space">{{selectedMovie.name}}</h4>
-              <p class="card-text">{{selectedMovie.review}}</p>
-              <p class="card-text">{{selectedMovie.dateCreated | date: 'dd/MM/yyyy'}}</p>
-              <div *ngFor="let q of selectedMovie.qualifiaction">
-                <ngx-rating-input
-                  ngDefaultControl
-                  [max]="5"
-                  [min]="0"
-                  [disabled]="true"
-                  [value]="q.qualification"
-                  customClass="my-class"
-                >
-                </ngx-rating-input>
-                <p class="card-text">{{q.qualification}}</p>
-              </div>
+<!-- Modal -->
+<div class="modal fade" id="myModal" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Pelicula</h5>
+        <span aria-hidden="true" class="closeM" (click)="closeFormModal()">&times;</span>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="columnL">
+            <img [src]="selectedMovie.poster" alt="Imagen-Familia" />
+            <h4 class="card-text space">{{ selectedMovie.name }}</h4>
+            <p class="card-text">{{ selectedMovie.review }}</p>
+            <p class="card-text">
+              {{ selectedMovie.dateCreated | date: "dd/MM/yyyy" }}
+            </p>
+            <div *ngFor="let q of selectedMovie.qualifiaction">
+              <ngx-rating-input ngDefaultControl [max]="5" [min]="0" [disabled]="true" [value]="q.qualification"
+                customClass="my-class">
+              </ngx-rating-input>
             </div>
-            <div class="columnC">
-              <h4>Involucrados</h4>
-              <div class="space" *ngFor="let involved of selectedMovie.involved">
-                <p class="card-text">{{involved.idRolNavigation.name}}: {{involved.idWorkerNavigation.name}}</p>
-              </div>
+          </div>
+          <div class="columnC">
+            <h4>Involucrados</h4>
+            <div class="space" *ngFor="let involved of selectedMovie.involved">
+              <p class="card-text">
+                {{ involved.idRolNavigation.name }}:
+                {{ involved.idWorkerNavigation.name }}
+              </p>
             </div>
-            <div class="columnR">
-              <h4>Comentarios</h4>
-              <app-comments [comments]="selectedMovie.comment"></app-comments>
-            </div>
+          </div>
+          <div class="columnR">
+            <h4>Comentarios</h4>
+            <app-comments [comments]="selectedMovie.comment"></app-comments>
           </div>
         </div>
       </div>
     </div>
   </div>
+</div>

@@ -1,14 +1,12 @@
 <div class="scroll" >
-    <div *ngFor="let item of comments">
+    <div #Comments *ngFor="let item of comments">
 
-        <div class="comment" *ngIf="item.userName != user">
+        <div class="comment" *ngIf="item.userName != user.userName">
             <strong>{{item.userName}}:</strong>
             {{item.comment1}}
         </div>
     
-        <div class="comment myComment" *ngIf="item.userName === user">
-            <!-- No mostrar cuando se yo el user  -->
-            <!-- <strong>Luis:</strong>  -->
+        <div class="comment myComment" *ngIf="item.userName === user.userName">
             {{item.comment1}}
         </div>
     </div>

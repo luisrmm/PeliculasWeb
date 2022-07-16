@@ -1,119 +1,148 @@
 .container {
-    width: 100%;
-    max-width: 1200px;
-    height: auto;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin: auto;
-  }
-  
-  .container>.card {
-    width: 330px;
-    border-radius: 8px;
-    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
-    margin-top: 30px;
-    margin: 20px;
-    overflow: hidden;
-    text-align: center;
-    transition: all 0.25s;
-    height: 755px;
-  }
-  
-  .container>.card:hover {
-    transform: translateY(-15px);
-    box-shadow: 0 12px 16px rgba(0, 0, 0, 0.2);
-  }
-  
-  .container>.card img {
-    width: 330px;
-    height: 460px;
-  }
-  
-  .container>.card h4 {
-    margin-top: 10px;
-    font-weight: 600;
-  }
-  
-  .container>.card p {
-    padding: 0 1rem;
-    font-size: 16px;
-    font-weight: 300;
-  }
-  
-  .container>.card a {
-    padding-top: 20px;
-    font-weight: 500;
-    text-decoration: none;
-    color: #3498db;
-    cursor: pointer;
-  }
-  
-  .click:hover {
-    color: #3fb5a3 !important;
-  }
+  width: 100%;
+  max-width: 1200px;
+  height: auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: auto;
+}
 
-  .row{
-    width: 100%;
-    height: 800px;
-  }
+.container>.card {
+  width: 330px;
+  border-radius: 8px;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+  margin-top: 30px;
+  margin: 20px;
+  overflow: hidden;
+  text-align: center;
+  transition: all 0.25s;
+  height: 755px;
+}
 
-  .columnL{
-    width: 400px;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    padding: 20px;
-    margin: 20px;
-    box-shadow: 5px 10px 18px #888888;
-    
+.container>.card:hover {
+  transform: translateY(-15px);
+  box-shadow: 0 12px 16px rgba(0, 0, 0, 0.2);
+}
 
-  }
-  .row>.columnL img {
-    width: 330px;
-    height: 460px;
-  }
-  .row>.columnL p{
-    margin-top: 10px;
-  }
+.container>.card img {
+  width: 330px;
+  height: 460px;
+}
 
-  .columnC{
-    width: 400px;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    padding: 20px;
-    margin: 20px;
-    box-shadow: 5px 10px 18px #888888;
-  }
-  .columnR{
-    width: 400px;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    padding: 20px;
-    margin: 20px;
-    box-shadow: 5px 10px 18px #888888;
-  }
-  
-  .modal-xl{
-    --bs-modal-width: 1354px !important;
-  }
+.container>.card h4 {
+  margin-top: 10px;
+  font-weight: 600;
+}
 
-  .closeM{
-    font-size: 25px !important;
-    cursor: pointer;
-  }
+.container>.card p {
+  padding: 0 1rem;
+  font-size: 16px;
+  font-weight: 300;
+}
 
-  .modal-header{
-    background-color: #22577A;
-    color: white;
-  }
+.container>.card a {
+  padding-top: 20px;
+  font-weight: 500;
+  text-decoration: none;
+  color: #3498db;
+  cursor: pointer;
+}
 
-  .space{
-    margin-top: 15px;
-  }
+.click:hover {
+  color: #3fb5a3 !important;
+}
 
-  .spaceA{
-    margin-top: 5px;
-  }
+.row {
+  width: 100%;
+  height: 800px;
+}
+
+.columnL {
+  width: 400px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 20px;
+  margin: 20px;
+  box-shadow: 5px 10px 18px #888888;
+
+
+}
+
+.row>.columnL img {
+  width: 330px;
+  height: 460px;
+}
+
+.row>.columnL p {
+  margin-top: 10px;
+}
+
+.columnC {
+  width: 400px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 20px;
+  margin: 20px;
+  box-shadow: 5px 10px 18px #888888;
+}
+
+.columnR {
+  width: 400px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 20px;
+  margin: 20px;
+  box-shadow: 5px 10px 18px #888888;
+}
+
+.modal-xl {
+  --bs-modal-width: 1354px !important;
+}
+
+.closeM {
+  font-size: 25px !important;
+  cursor: pointer;
+}
+
+.modal-header {
+  background-color: #22577A;
+  color: white;
+}
+
+.space {
+  margin-top: 15px;
+}
+
+.spaceA {
+  margin-top: 5px;
+}
+
+.messageError {
+  background-color: white;
+  box-shadow: 5px 10px 18px #888888;
+  height: 300px;
+  width: 800px;
+  margin: top;
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+.textAling {
+  margin-left: 30px;
+  margin-top: 20px;
+  margin-right: 45px;
+}
+
+.btn {
+  background-color: #57CC99;
+  border-color: #57CC99;
+}
+
+.btn:hover{
+  background-color: #22577A;
+  border-color: #22577A;
+}

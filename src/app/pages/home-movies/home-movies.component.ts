@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Modal } from "bootstrap";
+import { Observable } from 'rxjs';
+import { HelperService } from 'src/app/services/helper/helper.service';
 import { ApiService } from '../../services/api/api.service'
 declare var window: any;
 
@@ -11,91 +13,33 @@ declare var window: any;
 })
 export class HomeMoviesComponent implements OnInit {
   formModal: any;
-
-  cards = [
-    {
-      imagen: 'assets/poster1.jpg',
-      actor1: 'Pedero',
-      actor2: 'Jose',
-      actor3: 'Luis',
-      description: 'lorem isuem',
-      title: 'Doctor Strange',
-      button: 'Ver más',
-      toPage: 'admin/menu-config/tasa-interes',
-    },
-    {
-      imagen: 'assets/poster1.jpg',
-      actor1: 'Pedero',
-      actor2: 'Jose',
-      actor3: 'Luis',
-      description: 'lorem isuem',
-      title: 'Doctor Strange',
-      button: 'Ver más',
-      toPage: 'admin/menu-config/tipo-cambio',
-    },
-    {
-      imagen: 'assets/poster1.jpg',
-      actor1: 'Pedero',
-      actor2: 'Jose',
-      actor3: 'Luis',
-      description: 'lorem isuem',
-      title: 'Doctor Strange',
-      button: 'Ver más',
-      toPage: 'admin/menu-config/sing-in-admin',
-    },
-    {
-      imagen: 'assets/poster1.jpg',
-      actor1: 'Pedero',
-      actor2: 'Jose',
-      actor3: 'Luis',
-      description: 'lorem isuem',
-      title: 'Doctor Strange',
-      button: 'Ver más',
-      toPage: 'admin/menu-config/nivel-endeudamiento',
-    },
-    {
-      imagen: 'assets/poster1.jpg',
-      actor1: 'Pedero',
-      actor2: 'Jose',
-      actor3: 'Luis',
-      description: 'lorem isuem',
-      title: 'Doctor Strange',
-      button: 'Ver más',
-      toPage: 'admin/menu-config/automatizaion',
-    },
-  ];
-
-  modal = [
-    {
-      imagen: 'assets/poster1.jpg',
-      actor1: 'Pedero',
-      actor2: 'Jose',
-      actor3: 'Luis',
-      description: 'lorem isuem',
-      title: 'Doctor Strange',
-      button: 'Ver más',
-      toPage: 'admin/menu-config/tasa-interes',
-    }
-  ];
-
-  moviesI!: any[];
-
+  moviesI: any[] = [];
+  message: string = '';
   selectedMovie: any = {};
-
   testModal: Modal | undefined;
+  nameMovie = '';
+  loading = true;
 
-  currentItem = 'Television';
+  public messageAObservable!: Observable<string>;
 
   constructor(
     public router: Router,
     private api: ApiService,
+    private helper: HelperService
   ) { }
 
   ngOnInit(): void {
+    this.loading = true;
     this.formModal = new window.bootstrap.Modal(
       document.getElementById('myModal')
     );
     this.getFiveMovies();
+    this.helper.getMessageAObservable().subscribe(movie =>{
+      this.getSearchMovies(movie);
+    }
+    )
+    //this.helper.customMessage.subscribe(msg => this.message = msg);
+    //this.messageAObservable = this.helper.getMessageAObservable();
   }
 
   getFiveMovies() {
@@ -103,18 +47,31 @@ export class HomeMoviesComponent implements OnInit {
     m.subscribe(
       data => {
         this.moviesI = data;
-        console.log(this.moviesI)
+        this.loading = false;
+      }
+    )
+  }
+
+  getSearchMovies(nameMovie: any){
+    this.nameMovie = nameMovie;
+    let m = this.api.searchMovies(nameMovie)
+    m.subscribe(
+      data => {
+        this.moviesI = data;
+        this.loading = false;
       }
     )
   }
 
   redirect(toPage: string) {
 
-    this.router.navigate([toPage]);
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+      this.router.navigate([toPage]);
+    });
+    //this.router.navigate([toPage]);
   }
   openFormModal(itemCard: any) {
     this.selectedMovie = itemCard;
-    console.log(this.selectedMovie);
     this.formModal.show();
   }
 

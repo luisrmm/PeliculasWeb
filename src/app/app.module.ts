@@ -16,6 +16,7 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { CommentsComponent } from './components/common/comments.component';
 import { DatePipe } from '@angular/common';
 import { RatingsHelperModule } from 'ngx-ratings-helper';
+import { HelperService } from './services/helper/helper.service';
 
 
 @NgModule({
@@ -53,7 +54,7 @@ import { RatingsHelperModule } from 'ngx-ratings-helper';
       //controlErrorComponentAnchorFn: controlErrorComponentAnchorFn // Uncomment to see errors being positioned differently
     })
   ],
-  providers: [DatePipe],
+  providers: [DatePipe, HelperService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

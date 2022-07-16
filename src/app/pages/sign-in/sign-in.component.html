@@ -16,7 +16,7 @@
                 [controlErrorsTpl]="firstNameError"  maxlength="28">
             </div>
             <div class="form-group space">
-                <label class="spaceBottom" for="lastName">Apellidos</label> 
+                <label class="spaceBottom" for="lastName">Apellidos</label>
                 <input type="text" class="form-control" id="lastName" formControlName="lastName" [(ngModel)]="singIn.lastName"
                 [controlErrorsTpl]="lastNameError" maxlength="28">
             </div>
@@ -32,8 +32,10 @@
             </div>
             <button type="submit" class="btn btn-primary space btn" [disabled]="singInForm.invalid" >Registrarse</button>
         </form>
-        <span class="createAccount">¿Ya tienes cuenta? </span>
-        <span class="createAccountClick" (click)="redirect('login')">Iniciar Sesión</span>
+        <div style="margin-bottom: 30px;">
+          <span class="createAccount">¿Ya tienes cuenta? </span>
+          <span class="createAccountClick" (click)="redirect('login')">Iniciar Sesión</span>
+        </div>
     </div>
 </div>
 
@@ -53,14 +55,14 @@
       <i>El nombre debe ser mayor a 4 caracteres</i>
     </div>
   </ng-template>
-  
+
   <ng-template let-error let-text="text" #lastNameError>
     <!-- {{error | json}} {{text}} -->
     <div *ngIf="error?.minlength" class="errorMessage">
       <i>El apellido debe ser mayor a 4 caracteres</i>
     </div>
   </ng-template>
-  
+
   <ng-template let-error="error" #passwordError>
     <!-- {{error | json}} -->
     <div *ngIf="error?.pattern?.requiredPattern" class="errorMessage">

@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import {FormGroup, Validators, FormBuilder} from '@angular/forms'
 import{ ApiService } from '../../services/api/api.service'
 import Swal from 'sweetalert2';
+import { StorageService } from 'src/app/services/helper/storage-service.service';
 
 @Component({
   selector: 'app-login',
@@ -23,7 +24,8 @@ export class LoginComponent implements OnInit {
   constructor(
     public router: Router,
     private api: ApiService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private storageService: StorageService
     ) { }
 
   ngOnInit(): void {
@@ -36,7 +38,7 @@ export class LoginComponent implements OnInit {
   onLogin(){
     let l =  this.api.userLogin(this.login);
     l.subscribe(data =>{
-      localStorage.setItem('userName', JSON.stringify(data.userName));
+      this.storageService.setCurrentSession(data);
       this.api.errorsByUSer[this.login.userName] = 0;
       this.router.navigate(['home']);
       Swal.fire({
@@ -50,7 +52,7 @@ export class LoginComponent implements OnInit {
   }
 
   redirect(toPage: string) {
-    
+
     this.router.navigate([toPage]);
   }
 

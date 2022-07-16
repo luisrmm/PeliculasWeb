@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { LoginGuard } from './guards/login.guard';
 import { HomeMoviesComponent } from './pages/home-movies/home-movies.component';
 import { LoginComponent } from './pages/login/login.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
@@ -10,7 +11,7 @@ const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'login' },
   // Success User Pages
   { path: 'login', component: LoginComponent },
-  { path: 'home', component: HomeMoviesComponent },
+  { path: 'home', component: HomeMoviesComponent, canActivate: [ LoginGuard ] },
   { path: 'not-found', component: NotFoundComponent },
   { path: 'sign-in', component: SignInComponent },
   // Error Page Default

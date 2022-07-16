@@ -1,3 +1,4 @@
 export interface ResponLI{
-    userName: string
+    userName: string | null
+    token: string | null
 }
